@@ -4,6 +4,6 @@ Backend for meetup-Me react native app
 
 ### Technologies
 
-NodeJS
-ExpressJS
-MongoDB
+- NodeJS
+- ExpressJS
+- MongoDB
