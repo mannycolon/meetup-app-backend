@@ -28,7 +28,7 @@ const app = (0, _express2.default)();
  */
 (0, _middlewares2.default)(app);
 
-app.use('/api', [_modules.MeetupRoutes, _modules.GroupRoutes]);
+app.use('/api', [_modules.MeetupRoutes, _modules.GroupRoutes, _modules.UserRoutes]);
 
 const PORT = process.env.port || 3000;
 

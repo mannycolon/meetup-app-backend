@@ -1,7 +1,36 @@
 import mongoose, { Schema } from 'mongoose';
 
-const UserSchema = Schema({
-  email: String,
-});
+const UserSchema = Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+    },
+    fullName: String,
+    avatar: String,
+    providerData: {
+      uid: String,
+      provider: String,
+    },
+  },
+  { timestamp: true }
+);
+
+UserSchema.static.findOrCreate = async function (args) {
+  try {
+    const user = await this.findOne({
+      email: args.email,
+      fullName: args.fullName,
+    });
+
+    if (!user) {
+      return await this.create(args);
+    }
+
+    return user;
+  } catch (err) {
+    return err;
+  }
+};
 
 export default mongoose.model('User', UserSchema);
