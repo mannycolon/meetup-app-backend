@@ -1,6 +1,7 @@
 import User from './model';
 import { createToken } from './utils/createToken';
 import { facebookAuth } from './utils/facebookAuth';
+import { googleAuth } from './utils/googleAuth';
 
 export const loginWithAuth0 = async (req, res) => {
   const { provider, token } = req.body;
@@ -8,12 +9,13 @@ export const loginWithAuth0 = async (req, res) => {
 
   try {
     if (provider === 'google') {
-      // google auth
+      userInfo = await googleAuth(token);
     } else {
       userInfo = await facebookAuth(token);
     }
 
-    const user = await User.createOrFind(userInfo);
+    const user = await User.findOrCreate(userInfo);
+
     return res.status(200).json({
       sucess: true,
       user: {
@@ -22,6 +24,6 @@ export const loginWithAuth0 = async (req, res) => {
       token: `JWT ${createToken(user)}`,
     });
   } catch (err) {
-    return res.status(400).json({ error: true, errorMessage: e.message });
+    return res.status(400).json({ error: true, errorMessage: err.message });
   }
 };

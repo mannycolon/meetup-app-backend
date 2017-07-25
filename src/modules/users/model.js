@@ -16,7 +16,7 @@ const UserSchema = Schema(
   { timestamp: true }
 );
 
-UserSchema.static.findOrCreate = async function (args) {
+UserSchema.statics.findOrCreate = async function (args) {
   try {
     const user = await this.findOne({
       email: args.email,

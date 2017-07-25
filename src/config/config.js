@@ -1,5 +1,5 @@
 const devConfig = {
-  DB_URL: 'mongodb://localhost/meetup-dev',
+  DB_URL: 'mongodb://localhost/meetupME',
   JWT_SECRET: 'ababcdcdnananananamryn907',
 };
 
